@@ -153,7 +153,14 @@ struct racional divide_r(struct racional r1, struct racional r2) {
         return d;
 }
 
-
+void imprime_r(struct racional r) {
+        if (r.valido == 0) printf( "INVALIDO");
+        if (r.valido == 1) {
+                if (r.num == 0) printf("0");
+                if (r.den == 1 && r.num != 0) printf( "%d", r.num);
+                if (r.den != 1 && r.num != 0) printf( "%d/%d", r.num, r.den);
+        }
+}
 
 
 
