@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct racional {
-        unsigned short int valido;
-        int num;
-        int den;
-};
-
 int mdc(int a, int b) {
 
         int c;
@@ -16,13 +10,14 @@ int mdc(int a, int b) {
 
         while( c != 0) {
 
-          c = a % b;
-          a = b;
-          b = c;
+                c = a % b;
+                a = b;
+                b = c;
         }
 
         return a;
 }
+
 int mmc( int a, int b) {
 
         int n, r, den;
@@ -34,12 +29,12 @@ int mmc( int a, int b) {
 
         return r;
 }
+
 int valido_r( struct racional r) {
 
         if (r.den == 0) return 0;
         return 1;
 }
-
 struct racional criar_r( int numerador, int denominador) {
 
         struct racional n;
