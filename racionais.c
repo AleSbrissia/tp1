@@ -22,6 +22,17 @@ int mdc(int a, int b) {
 
         return a;
 }
+int mmc( int a, int b) {
+
+        int n, r, den;
+
+        n = (a * b);
+        den = mdc(a, b);
+        r = n / den;
+
+
+        return r;
+}
 int valido_r( struct racional r) {
 
         if (r.den == 0) return 0;
@@ -69,3 +80,103 @@ int aleat(int min, int max) {
 
         return n;
 }
+struct racional criar_r( int numerador, int denominador) {
+
+        struct racional n;
+
+        n.num = numerador;
+        n.den = denominador;
+        n.valido = valido_r(n);
+
+        return n;
+}
+
+struct racional simplifica_r( struct racional r) {
+
+        int d;
+
+        if (r.valido == 1) {
+
+                if ((r.num < 0 && r.den < 0) || (r.num >= 0 && r.den < 0)) { //casos que r eh multiplicado po -1/-1
+                        r.den *= -1;
+                        r.num *= -1;
+                }
+                if ( r.num != 0) { //simplifica por mdc
+                        d = mdc(r.num, r.den);
+                        r.num /= d;
+                        r.den /= d;
+                }
+                return r;
+         }
+         return r; /*caso nao seja valido, r eh devolvido sem modificacao */
+}
+
+/* as entradas min e max devem ser > 0 */
+int aleat(int min, int max) {
+
+        int n;
+
+
+        n = rand() % max; //garante que min < n < max
+        n += min;
+
+        return n;
+}
+struct racional sorteia_r (int n) {
+
+        int den, num;
+        struct racional r;
+
+        den = aleat( 0, n);
+        num = aleat( 0, n);
+
+        r = criar_r(num, den);
+
+        r = simplifica_r( r );
+
+        return r;
+}
+
+struct racional soma_r(struct racional r1, struct racional r2) {
+        struct racional s;
+
+        if ( r1.valido == 1 && r2.valido == 1) {
+                s.den = mmc(r1.den, r2.den);
+
+                r1.num = (s.den / r1.den) * r1.num;
+                r2.num = (s.den / r2.den) * r2.num;
+
+                s.num = r1.num + r2.num;
+                s.valido = valido_r(s);
+                return s;
+        }
+        s.num = 0; //caso um numero nao seja valido, s eh invalidado
+        s.den = 0;
+        s.valido = 0;
+        return s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
