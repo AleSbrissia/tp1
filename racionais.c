@@ -104,6 +104,7 @@ struct racional soma_r(struct racional r1, struct racional r2) {
 
                 s.num = r1.num + r2.num;
                 s.valido = valido_r(s);
+                s = simplifica_r(s);
                 return s;
         }
         s.num = 0; //caso um numero nao seja valido, s eh invalidado
@@ -128,7 +129,7 @@ struct racional multiplica_r(struct racional r1, struct racional r2) {
         m.num = r1.num * r2.num;
         m.den = r1.den * r2.den;
         m.valido = valido_r(m);
-
+        m = simplifica_r(m);
         return m;
 }
 
@@ -141,8 +142,8 @@ struct racional divide_r(struct racional r1, struct racional r2) {
                 t = r2.den; //inverto o numerador e denominador de r2
                 r2.den = r2.num;
                 r2.num = t;
-
                 d = multiplica_r(r1, r2);
+                d = simplificar_r(d);
                 return d;
         }
         d.num = 0;
