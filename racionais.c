@@ -69,54 +69,10 @@ struct racional simplifica_r( struct racional r) {
         return r; /*caso nao seja valido, r eh devolvido sem modificacao */
 }
 
-int aleat(int min, int max) {
-
-        int n;
-
-        srand(0);
-
-        n = rand() % max; //garante que min < n < max
-        n += min;
-
-        return n;
-}
-struct racional criar_r( int numerador, int denominador) {
-
-        struct racional n;
-
-        n.num = numerador;
-        n.den = denominador;
-        n.valido = valido_r(n);
-
-        return n;
-}
-
-struct racional simplifica_r( struct racional r) {
-
-        int d;
-
-        if (r.valido == 1) {
-
-                if ((r.num < 0 && r.den < 0) || (r.num >= 0 && r.den < 0)) { //casos que r eh multiplicado po -1/-1
-                        r.den *= -1;
-                        r.num *= -1;
-                }
-                if ( r.num != 0) { //simplifica por mdc
-                        d = mdc(r.num, r.den);
-                        r.num /= d;
-                        r.den /= d;
-                }
-                return r;
-         }
-         return r; /*caso nao seja valido, r eh devolvido sem modificacao */
-}
-
 /* as entradas min e max devem ser > 0 */
 int aleat(int min, int max) {
 
         int n;
-
-
         n = rand() % max; //garante que min < n < max
         n += min;
 
@@ -156,7 +112,25 @@ struct racional soma_r(struct racional r1, struct racional r2) {
         return s;
 }
 
+struct racional subtrai_r(struct racional r1, struct racional r2) {
 
+        struct racional sb;
+
+        r2.num *= -1;
+        sb = soma_r(r1, r2);
+        return sb;
+}
+
+struct racional multiplica_r(struct racional r1, struct racional r2) {
+
+        struct racional m;
+
+        m.num = r1.num * r2.num;
+        m.den = r1.den * r2.den;
+        m.valido = valido_r(m);
+
+        return m;
+}
 
 
 
