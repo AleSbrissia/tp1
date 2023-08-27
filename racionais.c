@@ -1,6 +1,6 @@
 #include "racionais.h"
 #include <stdio.h>   /* acrescente demais includes que voce queira ou precise */
-#include <sdtlib.h>
+#include <stdlib.h>
 
 struct racional {
         unsigned short int valido;
@@ -132,7 +132,24 @@ struct racional multiplica_r(struct racional r1, struct racional r2) {
         return m;
 }
 
+struct racional divide_r(struct racional r1, struct racional r2) {
 
+        int t;
+        struct racional d;
+
+        if (r1.valido == 1 && r2.valido == 1) {
+                t = r2.den; //inverto o numerador e denominador de r2
+                r2.den = r2.num;
+                r2.num = t;
+
+                d = multiplica_r(r1, r2);
+                return d;
+        }
+        d.num = 0;
+        d.den = 0;
+        d.valido = 0;
+        return d;
+}
 
 
 
