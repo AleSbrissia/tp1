@@ -1,6 +1,7 @@
 #include "racionais.h"
 #include <stdio.h>   /* acrescente demais includes que voce queira ou precise */
 #include <stdlib.h>
+#include <time.h>
 
 struct racional {
         unsigned short int valido;
